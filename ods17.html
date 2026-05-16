@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ODS 17 — Parcerias para o Desenvolvimento Sustentável</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --brand: #1a6fa8;
+      --brand-light: #2196f3;
+      --accent: #f9c11d;
+      --accent2: #19a86b;
+      --accent3: #e84393;
+      --bg: #06101e;
+      --bg2: #0d1b2e;
+      --bg3: #0f2235;
+      --glass: rgba(255,255,255,0.04);
+      --glass-border: rgba(255,255,255,0.10);
+      --text: #e8f1fa;
+      --text-muted: #7fa7c8;
+      --card-bg: rgba(13,27,46,0.85);
+      --shadow: 0 8px 40px rgba(0,0,0,0.5);
+      --radius: 20px;
+      --transition: 0.4s cubic-bezier(.4,0,.2,1);
+    }
+    [data-theme="light"] {
+      --bg: #f0f6ff;
+      --bg2: #ddeeff;
+      --bg3: #c8e0f7;
+      --glass: rgba(255,255,255,0.7);
+      --glass-border: rgba(26,111,168,0.15);
+      --text: #0d2036;
+      --text-muted: #3a6080;
+      --card-bg: rgba(255,255,255,0.90);
+      --shadow: 0 8px 40px rgba(26,111,168,0.12);
+    }
+
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      transition: background var(--transition), color var(--transition);
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    section { padding: 100px 0; }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg2); }
+    ::-webkit-scrollbar-thumb { background: var(--brand); border-radius: 3px; }
+
+    /* ===== CONTAINER ===== */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* ===== BACKGROUND BLOBS ===== */
+    .blobs {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden;
+    }
+    .blob {
+      position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.18;
+      animation: blobFloat 18s ease-in-out infinite alternate;
+    }
+    .blob1 { width: 600px; height: 600px; background: var(--brand); top: -200px; left: -150px; animation-delay: 0s; }
+    .blob2 { width: 400px; height: 400px; background: var(--accent2); bottom: 0; right: -100px; animation-delay: -6s; }
+    .blob3 { width: 300px; height: 300px; background: var(--accent); top: 50%; left: 50%; animation-delay: -12s; }
+    @keyframes blobFloat {
+      from { transform: translateY(0) scale(1); }
+      to { transform: translateY(40px) scale(1.08); }
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+      padding: 18px 0;
+      background: rgba(6,16,30,0.7);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      transition: background var(--transition);
+    }
+    [data-theme="light"] nav { background: rgba(240,246,255,0.82); }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1200px; margin: 0 auto; padding: 0 24px;
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.3rem;
+      background: linear-gradient(90deg, var(--brand-light), var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-links {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-links a {
+      font-size: 0.85rem; font-weight: 500;
+      padding: 8px 14px; border-radius: 50px;
+      color: var(--text-muted);
+      transition: color .3s, background .3s;
+    }
+    .nav-links a:hover { color: var(--text); background: var(--glass); }
+    .theme-btn {
+      background: var(--glass); border: 1px solid var(--glass-border);
+      border-radius: 50px; padding: 8px 16px;
+      cursor: pointer; font-size: 0.85rem; color: var(--text-muted);
+      transition: all .3s;
+    }
+    .theme-btn:hover { color: var(--accent); border-color: var(--accent); }
+    .hamburger {
+      display: none; background: none; border: none;
+      cursor: pointer; font-size: 1.4rem; color: var(--text);
+    }
+    .mobile-menu {
+      display: none; flex-direction: column; gap: 6px;
+      padding: 16px 24px;
+      background: var(--bg2); border-top: 1px solid var(--glass-border);
+    }
+    .mobile-menu a {
+      padding: 10px 14px; border-radius: 10px;
+      font-weight: 500; color: var(--text-muted);
+      transition: all .3s;
+    }
+    .mobile-menu a:hover { color: var(--text); background: var(--glass); }
+    .mobile-menu.open { display: flex; }
+
+    /* ===== HERO ===== */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; position: relative; padding: 140px 24px 100px;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(26,111,168,0.25) 0%, transparent 70%);
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(249,193,29,0.12); border: 1px solid rgba(249,193,29,0.3);
+      border-radius: 50px; padding: 6px 18px;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent);
+      letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 28px; animation: fadeInDown .8s ease both;
+    }
+	.hero-num {
+	  font-family: 'Syne', sans-serif;
+	  font-size: clamp(6rem, 18vw, 14rem);
+	  font-weight: 900;
+	  line-height: 1;
+
+	background: linear-gradient(
+		135deg,
+		#ffffff 0%,
+		#8ec5ff 25%,
+		#42a5f5 55%,
+		#1565c0 100%
+	  );
+
+	  -webkit-background-clip: text;
+	  -webkit-text-fill-color: transparent;
+
+	  background-clip: text;
+
+	  letter-spacing: -6px;
+
+	  filter: drop-shadow(0 0 35px rgba(33,150,243,0.25));
+
+	  animation: floatNum 4s ease-in-out infinite;
+	}
+
+	@keyframes floatNum {
+	  0%, 100% {
+		transform: translateY(0px);
+	  }
+
+	  50% {
+		transform: translateY(-8px);
+	  }
+	}
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      font-weight: 700; line-height: 1.2;
+      margin: 8px 0 24px;
+      animation: fadeInDown 1s .2s ease both;
+    }
+    .hero-desc {
+      font-size: 1.1rem; color: var(--text-muted); max-width: 620px; margin: 0 auto 40px;
+      line-height: 1.7; animation: fadeInDown 1s .3s ease both;
+    }
+    .hero-actions {
+      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+      animation: fadeInDown 1s .4s ease both;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brand), var(--brand-light));
+      color: #fff; border: none; border-radius: 50px;
+      padding: 14px 32px; font-size: 1rem; font-weight: 600;
+      cursor: pointer; transition: all .3s;
+      box-shadow: 0 4px 24px rgba(26,111,168,0.4);
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(26,111,168,0.6); }
+    .btn-secondary {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--glass-border); border-radius: 50px;
+      padding: 14px 32px; font-size: 1rem; font-weight: 600;
+      cursor: pointer; transition: all .3s;
+    }
+    .btn-secondary:hover { border-color: var(--brand-light); color: var(--brand-light); transform: translateY(-3px); }
+    .scroll-hint {
+      position: absolute; bottom: 36px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: var(--text-muted); font-size: 0.78rem; letter-spacing: 0.08em;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(10px); } }
+
+    /* ===== SECTION HEADER ===== */
+    .section-header { text-align: center; margin-bottom: 64px; }
+    .section-tag {
+      display: inline-block;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 5px 16px; border-radius: 50px;
+      background: rgba(33,150,243,0.12); color: var(--brand-light);
+      border: 1px solid rgba(33,150,243,0.25);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700; line-height: 1.2; margin-bottom: 16px;
+    }
+    .section-sub { color: var(--text-muted); font-size: 1.05rem; max-width: 580px; margin: 0 auto; line-height: 1.7; }
+
+    /* ===== COUNTERS ===== */
+    #counters { background: var(--bg2); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border); padding: 80px 0; }
+    .counters-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 48px; text-align: center; }
+    .counter-item { position: relative; }
+    .counter-num {
+      font-family: 'Syne', sans-serif; font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--brand-light), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .counter-label { font-size: 0.95rem; color: var(--text-muted); margin-top: 8px; }
+
+    /* ===== OBJECTIVE ===== */
+    #objectives { background: var(--bg); }
+    .objectives-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .objectives-visual {
+      position: relative; display: flex; justify-content: center; align-items: center;
+    }
+    .globe-wrap {
+      width: 320px; height: 320px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, rgba(33,150,243,0.4), rgba(26,111,168,0.1) 60%, transparent);
+      border: 2px solid rgba(33,150,243,0.2);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; animation: rotateSlow 20s linear infinite;
+    }
+    @keyframes rotateSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .globe-wrap .orbit {
+      position: absolute; border-radius: 50%; border: 1px dashed rgba(255,255,255,0.15);
+    }
+    .orbit1 { width: 240px; height: 240px; animation: rotateSlow 8s linear infinite reverse; }
+    .orbit2 { width: 340px; height: 340px; animation: rotateSlow 14s linear infinite; }
+    .orbit3 { width: 440px; height: 440px; animation: rotateSlow 22s linear infinite reverse; }
+    .globe-icon { font-size: 5rem; animation: rotateSlow 20s linear infinite reverse; }
+    .dot {
+      position: absolute; width: 12px; height: 12px; border-radius: 50%;
+      background: var(--accent); box-shadow: 0 0 10px var(--accent);
+    }
+    .dot1 { top: -6px; left: 50%; }
+    .dot2 { top: 50%; right: -6px; }
+    .dot3 { bottom: -6px; left: 30%; }
+    .objectives-list { display: flex; flex-direction: column; gap: 24px; }
+    .obj-item {
+      display: flex; gap: 18px; align-items: flex-start;
+      padding: 20px; border-radius: 16px;
+      background: var(--glass); border: 1px solid var(--glass-border);
+      transition: all .3s;
+    }
+    .obj-item:hover { border-color: var(--brand-light); transform: translateX(6px); }
+    .obj-icon {
+      width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--brand), var(--brand-light));
+      display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+    }
+    .obj-text h4 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .obj-text p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* ===== AREAS (CARDS) ===== */
+    #areas { background: var(--bg2); }
+    .areas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+    .area-card {
+      background: var(--card-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      cursor: pointer; transition: all .35s;
+      position: relative; overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+    .area-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--card-color);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .35s;
+    }
+    .area-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,0,0,0.3); border-color: var(--card-color-a); }
+    .area-card:hover::before { transform: scaleX(1); }
+    .area-icon {
+      font-size: 2.2rem; margin-bottom: 16px;
+      width: 56px; height: 56px; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--card-color-bg);
+    }
+    .area-card h3 { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+    .area-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* ===== EXAMPLES ===== */
+    #examples { background: var(--bg); }
+    .examples-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
+    .example-card {
+      background: var(--card-bg); border: 1px solid var(--glass-border);
+      border-radius: var(--radius); overflow: hidden; transition: all .35s;
+      backdrop-filter: blur(12px);
+    }
+    .example-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+    .example-header {
+      padding: 28px 28px 20px;
+      background: linear-gradient(135deg, var(--ex-color1), var(--ex-color2));
+      position: relative; overflow: hidden;
+    }
+    .example-header::after {
+      content: var(--ex-icon);
+      position: absolute; right: 20px; bottom: -10px;
+      font-size: 5rem; opacity: 0.15;
+    }
+    .example-tag {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      background: rgba(255,255,255,0.2); border-radius: 50px; padding: 4px 12px; display: inline-block;
+      margin-bottom: 12px; color: #fff;
+    }
+    .example-header h3 { font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 700; color: #fff; }
+    .example-body { padding: 24px 28px; }
+    .example-body p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 16px; }
+    .example-meta { display: flex; gap: 12px; flex-wrap: wrap; }
+    .meta-tag {
+      font-size: 0.78rem; padding: 4px 12px; border-radius: 50px;
+      background: var(--glass); border: 1px solid var(--glass-border); color: var(--text-muted);
+    }
+
+    /* ===== STATS ===== */
+    #stats { background: var(--bg2); }
+    .stats-visual { max-width: 900px; margin: 0 auto; }
+    .stat-bars { display: flex; flex-direction: column; gap: 20px; }
+    .stat-row { display: grid; grid-template-columns: 200px 1fr 60px; gap: 16px; align-items: center; }
+    .stat-label { font-size: 0.9rem; color: var(--text-muted); text-align: right; }
+    .bar-track {
+      height: 12px; background: var(--glass); border-radius: 50px;
+      border: 1px solid var(--glass-border); overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%; border-radius: 50px;
+      background: linear-gradient(90deg, var(--bar-color1), var(--bar-color2));
+      width: 0; transition: width 1.5s cubic-bezier(.4,0,.2,1);
+    }
+    .stat-val { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--text); }
+
+    /* ===== TIMELINE ===== */
+    #timeline { background: var(--bg); }
+    .timeline-wrap { position: relative; max-width: 800px; margin: 0 auto; }
+    .timeline-wrap::before {
+      content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom, var(--brand-light), var(--accent2));
+      transform: translateX(-50%);
+    }
+    .tl-item {
+      display: flex; gap: 32px; align-items: flex-start;
+      margin-bottom: 56px; position: relative;
+    }
+    .tl-item:nth-child(even) { flex-direction: row-reverse; }
+    .tl-item:nth-child(even) .tl-card { text-align: right; }
+    .tl-dot {
+      position: absolute; left: 50%; top: 6px;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--accent); border: 3px solid var(--bg);
+      transform: translateX(-50%);
+      box-shadow: 0 0 20px rgba(249,193,29,0.5);
+      z-index: 2; flex-shrink: 0;
+    }
+    .tl-card {
+      background: var(--card-bg); border: 1px solid var(--glass-border);
+      border-radius: var(--radius); padding: 24px; flex: 1;
+      backdrop-filter: blur(12px); transition: all .3s;
+    }
+    .tl-card:hover { border-color: var(--brand-light); }
+    .tl-year {
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem;
+      color: var(--brand-light); margin-bottom: 6px;
+    }
+    .tl-card h4 { font-family: 'Syne', sans-serif; font-weight: 700; margin-bottom: 8px; }
+    .tl-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* ===== FACTS ===== */
+    #facts { background: var(--bg2); }
+    .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+    .fact-card {
+      background: var(--card-bg); border: 1px solid var(--glass-border);
+      border-radius: var(--radius); padding: 28px;
+      backdrop-filter: blur(12px); transition: all .3s;
+      position: relative; overflow: hidden;
+    }
+    .fact-card::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 180px; height: 180px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(33,150,243,0.1), transparent 70%);
+    }
+    .fact-card:hover { transform: scale(1.03); border-color: var(--brand-light); }
+    .fact-num {
+      font-family: 'Syne', sans-serif; font-size: 2.5rem; font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent3));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 8px;
+    }
+    .fact-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* ===== QUIZ ===== */
+    #quiz { background: var(--bg); }
+    .quiz-box {
+      max-width: 700px; margin: 0 auto;
+      background: var(--card-bg); border: 1px solid var(--glass-border);
+      border-radius: var(--radius); padding: 48px; backdrop-filter: blur(12px);
+    }
+    .quiz-progress {
+      display: flex; gap: 8px; margin-bottom: 36px;
+    }
+    .quiz-dot {
+      height: 4px; flex: 1; border-radius: 50px;
+      background: var(--glass); border: 1px solid var(--glass-border);
+      transition: background .4s;
+    }
+    .quiz-dot.done { background: var(--brand-light); }
+    .quiz-dot.active { background: var(--accent); }
+    .quiz-q {
+      font-family: 'Syne', sans-serif; font-size: 1.25rem; font-weight: 700;
+      margin-bottom: 28px; line-height: 1.4;
+    }
+    .quiz-options { display: flex; flex-direction: column; gap: 14px; }
+    .quiz-opt {
+      background: var(--glass); border: 1px solid var(--glass-border);
+      border-radius: 12px; padding: 14px 20px; cursor: pointer;
+      font-size: 0.95rem; transition: all .25s; color: var(--text);
+    }
+    .quiz-opt:hover { border-color: var(--brand-light); background: rgba(33,150,243,0.1); }
+    .quiz-opt.correct { border-color: var(--accent2); background: rgba(25,168,107,0.15); color: var(--accent2); }
+    .quiz-opt.wrong { border-color: #ef4444; background: rgba(239,68,68,0.1); color: #ef4444; }
+    .quiz-feedback {
+      margin-top: 20px; padding: 14px 20px; border-radius: 12px;
+      font-size: 0.9rem; line-height: 1.5; display: none;
+    }
+    .quiz-feedback.show { display: block; }
+    .quiz-feedback.ok { background: rgba(25,168,107,0.12); border: 1px solid rgba(25,168,107,0.3); color: var(--accent2); }
+    .quiz-feedback.fail { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: #f87171; }
+    .quiz-nav { margin-top: 28px; display: flex; justify-content: space-between; align-items: center; }
+    .quiz-score { font-family: 'Syne', sans-serif; font-size: 0.9rem; color: var(--text-muted); }
+
+    /* ===== MAP ===== */
+    #map { background: var(--bg2); }
+    .map-container { position: relative; overflow: hidden; border-radius: var(--radius); border: 1px solid var(--glass-border); max-width: 900px; margin: 0 auto; }
+    .world-svg { width: 100%; height: auto; }
+    .map-dot {
+      cursor: pointer;
+      transition: r .3s;
+    }
+    .map-dot:hover { r: 9; }
+    .map-tooltip {
+      position: absolute; background: var(--bg); border: 1px solid var(--glass-border);
+      border-radius: 10px; padding: 10px 14px; font-size: 0.82rem; pointer-events: none;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4); display: none; max-width: 200px; z-index: 10;
+    }
+    .map-tooltip.show { display: block; }
+    .map-tooltip strong { font-family: 'Syne', sans-serif; display: block; margin-bottom: 4px; font-size: 0.88rem; }
+
+    /* ===== NEWS ===== */
+    #news { background: var(--bg); }
+    .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .news-card {
+      background: var(--card-bg); border: 1px solid var(--glass-border);
+      border-radius: var(--radius); padding: 28px;
+      backdrop-filter: blur(12px); transition: all .3s;
+    }
+    .news-card:hover { transform: translateY(-4px); border-color: var(--brand-light); }
+    .news-date { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .news-card h4 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 10px; line-height: 1.4; }
+    .news-card p { font-size: 0.87rem; color: var(--text-muted); line-height: 1.6; }
+    .news-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; font-size: 0.85rem; color: var(--brand-light); font-weight: 600; }
+
+    /* ===== CONTACT ===== */
+    #contact { background: var(--bg2); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: start; }
+    .contact-info h3 { font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 700; margin-bottom: 16px; }
+    .contact-info p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 28px; }
+    .contact-methods { display: flex; flex-direction: column; gap: 14px; }
+    .contact-m {
+      display: flex; align-items: center; gap: 14px;
+      padding: 14px 18px; border-radius: 12px;
+      background: var(--glass); border: 1px solid var(--glass-border);
+    }
+    .contact-m i { font-size: 1.1rem; color: var(--brand-light); }
+    .contact-m span { font-size: 0.9rem; color: var(--text-muted); }
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block; font-size: 0.85rem; font-weight: 600;
+      color: var(--text-muted); margin-bottom: 8px; letter-spacing: 0.04em;
+    }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; background: var(--glass); border: 1px solid var(--glass-border);
+      border-radius: 12px; padding: 12px 16px;
+      font-size: 0.95rem; color: var(--text); font-family: 'DM Sans', sans-serif;
+      transition: border-color .3s;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      outline: none; border-color: var(--brand-light);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-group select option { background: var(--bg2); }
+    .form-success {
+      display: none; text-align: center; padding: 40px 20px;
+    }
+    .form-success.show { display: block; }
+    .form-success i { font-size: 3rem; color: var(--accent2); margin-bottom: 16px; }
+    .form-success h4 { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--glass-border);
+      padding: 60px 0 32px;
+    }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; margin: 12px 0 20px; }
+    .social-links { display: flex; gap: 12px; }
+    .social-link {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--glass); border: 1px solid var(--glass-border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; color: var(--text-muted);
+      transition: all .3s;
+    }
+    .social-link:hover { background: var(--brand); color: #fff; border-color: var(--brand); }
+    .footer-col h5 { font-family: 'Syne', sans-serif; font-weight: 700; margin-bottom: 16px; font-size: 0.95rem; }
+    .footer-col a {
+      display: block; font-size: 0.88rem; color: var(--text-muted);
+      padding: 5px 0; transition: color .3s;
+    }
+    .footer-col a:hover { color: var(--brand-light); }
+    .footer-bottom {
+      border-top: 1px solid var(--glass-border); padding-top: 28px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+      font-size: 0.82rem; color: var(--text-muted);
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .objectives-grid, .contact-grid { grid-template-columns: 1fr; }
+      .timeline-wrap::before { left: 24px; }
+      .tl-item, .tl-item:nth-child(even) { flex-direction: column; padding-left: 60px; }
+      .tl-dot { left: 24px; }
+      .tl-item:nth-child(even) .tl-card { text-align: left; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .stat-row { grid-template-columns: 1fr; text-align: left; }
+      .stat-label { text-align: left; }
+    }
+    @media (max-width: 640px) {
+      section { padding: 72px 0; }
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .globe-wrap { width: 220px; height: 220px; }
+      .orbit2, .orbit3 { display: none; }
+      .quiz-box { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Background blobs -->
+<div class="blobs">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+</div>
+
+<!-- ===== NAV ===== -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <div class="nav-logo">ODS<span style="color:var(--accent)">17</span></div>
+    <div class="nav-links">
+      <a href="#objectives">Objetivos</a>
+      <a href="#areas">Áreas</a>
+      <a href="#examples">Exemplos</a>
+      <a href="#timeline">Agenda 2030</a>
+      <a href="#quiz">Quiz</a>
+      <a href="#contact">Participar</a>
+      <button class="theme-btn" id="themeBtn" aria-label="Alternar tema">
+        <i class="fa-solid fa-moon" id="themeIcon"></i>
+      </button>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#objectives">Objetivos</a>
+    <a href="#areas">Áreas</a>
+    <a href="#examples">Exemplos</a>
+    <a href="#timeline">Agenda 2030</a>
+    <a href="#facts">Curiosidades</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#contact">Participar</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="hero-badge"><i class="fa-solid fa-handshake"></i> Agenda 2030 — ONU</div>
+    <div class="hero-num">17</div>
+    <h1 class="hero-title">Parcerias e Meios de<br><span style="background:linear-gradient(90deg,var(--accent2),var(--brand-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Implementação</span></h1>
+    <p class="hero-desc">Fortalecer os meios de implementação e revitalizar a parceria global para o desenvolvimento sustentável — porque nenhum país alcança as metas sozinho.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('objectives').scrollIntoView({behavior:'smooth'})">
+        <i class="fa-solid fa-arrow-down" style="margin-right:8px;"></i> Explorar
+      </button>
+      <button class="btn-secondary" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">
+        <i class="fa-solid fa-circle-question" style="margin-right:8px;"></i> Fazer o Quiz
+      </button>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <i class="fa-solid fa-chevron-down"></i>
+    <span>Role para baixo</span>
+  </div>
+</section>
+
+<!-- ===== COUNTERS ===== -->
+<section id="counters">
+  <div class="container">
+    <div class="counters-grid">
+      <div class="counter-item fade-up">
+        <div class="counter-num" data-target="193" data-suffix="">0</div>
+        <div class="counter-label">Países signatários da Agenda 2030</div>
+      </div>
+      <div class="counter-item fade-up" style="transition-delay:.1s">
+        <div class="counter-num" data-target="17" data-suffix="">0</div>
+        <div class="counter-label">Objetivos de Desenvolvimento Sustentável</div>
+      </div>
+      <div class="counter-item fade-up" style="transition-delay:.2s">
+        <div class="counter-num" data-target="169" data-suffix="">0</div>
+        <div class="counter-label">Metas estabelecidas pela Agenda 2030</div>
+      </div>
+      <div class="counter-item fade-up" style="transition-delay:.3s">
+        <div class="counter-num" data-target="4000" data-suffix="+">0</div>
+        <div class="counter-label">Parcerias globais registradas pela ONU</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== OBJECTIVES ===== -->
+<section id="objectives">
+  <div class="container">
+    <div class="objectives-grid">
+      <div class="objectives-visual fade-up">
+        <div class="globe-wrap">
+          <div class="orbit orbit1"><div class="dot dot1"></div></div>
+          <div class="orbit orbit2"><div class="dot dot2"></div></div>
+          <div class="orbit orbit3"><div class="dot dot3"></div></div>
+          <div class="globe-icon">🌍</div>
+        </div>
+      </div>
+      <div class="objectives-list fade-up" style="transition-delay:.15s">
+        <div class="section-tag" style="width:fit-content;">Por que importa</div>
+        <h2 class="section-title" style="text-align:left;margin-bottom:32px;">O poder das parcerias globais</h2>
+        <div class="obj-item">
+          <div class="obj-icon">💰</div>
+          <div class="obj-text">
+            <h4>Financiamento para o desenvolvimento</h4>
+            <p>Mobilizar recursos financeiros para países em desenvolvimento, por meio de impostos, comércio e investimentos diretos.</p>
+          </div>
+        </div>
+        <div class="obj-item">
+          <div class="obj-icon">💻</div>
+          <div class="obj-text">
+            <h4>Transferência de tecnologia</h4>
+            <p>Compartilhar conhecimentos e tecnologia entre países desenvolvidos e em desenvolvimento para acelerar o progresso.</p>
+          </div>
+        </div>
+        <div class="obj-item">
+          <div class="obj-icon">🏛️</div>
+          <div class="obj-text">
+            <h4>Fortalecimento institucional</h4>
+            <p>Apoiar capacidades de planejamento, gestão e implementação de políticas públicas sustentáveis.</p>
+          </div>
+        </div>
+        <div class="obj-item">
+          <div class="obj-icon">📊</div>
+          <div class="obj-text">
+            <h4>Dados e monitoramento</h4>
+            <p>Melhorar a disponibilidade de dados de qualidade para acompanhar o progresso das metas globais.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AREAS ===== -->
+<section id="areas">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag">Áreas de Atuação</div>
+      <h2 class="section-title">Campos de parceria global</h2>
+      <p class="section-sub">A ODS 17 conecta ações em múltiplos setores estratégicos para o desenvolvimento sustentável.</p>
+    </div>
+    <div class="areas-grid">
+      <!-- Technology -->
+      <div class="area-card fade-up" style="--card-color:#2196f3;--card-color-a:rgba(33,150,243,0.5);--card-color-bg:rgba(33,150,243,0.12);">
+        <div class="area-icon">💻</div>
+        <h3>Tecnologia</h3>
+        <p>Promover o acesso universal à internet, inteligência artificial e inovação tecnológica como ferramentas de desenvolvimento.</p>
+      </div>
+      <!-- Education -->
+      <div class="area-card fade-up" style="--card-color:#f9c11d;--card-color-a:rgba(249,193,29,0.5);--card-color-bg:rgba(249,193,29,0.12);transition-delay:.07s">
+        <div class="area-icon">🎓</div>
+        <h3>Educação</h3>
+        <p>Intercâmbio de conhecimentos, programas de bolsas internacionais e capacitação profissional em países menos desenvolvidos.</p>
+      </div>
+      <!-- Health -->
+      <div class="area-card fade-up" style="--card-color:#e84393;--card-color-a:rgba(232,67,147,0.5);--card-color-bg:rgba(232,67,147,0.12);transition-delay:.14s">
+        <div class="area-icon">🏥</div>
+        <h3>Saúde</h3>
+        <p>Colaboração internacional na pesquisa médica, distribuição equitativa de vacinas e sistemas de saúde resilientes.</p>
+      </div>
+      <!-- Environment -->
+      <div class="area-card fade-up" style="--card-color:#19a86b;--card-color-a:rgba(25,168,107,0.5);--card-color-bg:rgba(25,168,107,0.12);transition-delay:.21s">
+        <div class="area-icon">🌿</div>
+        <h3>Meio Ambiente</h3>
+        <p>Acordos climáticos, financiamento verde e transferência de tecnologias limpas para a transição energética global.</p>
+      </div>
+      <!-- Economy -->
+      <div class="area-card fade-up" style="--card-color:#ff6b35;--card-color-a:rgba(255,107,53,0.5);--card-color-bg:rgba(255,107,53,0.12);transition-delay:.28s">
+        <div class="area-icon">📈</div>
+        <h3>Economia</h3>
+        <p>Comércio justo, redução de dívidas externas e criação de um sistema financeiro global mais inclusivo e equitativo.</p>
+      </div>
+      <!-- Commerce -->
+      <div class="area-card fade-up" style="--card-color:#9b59b6;--card-color-a:rgba(155,89,182,0.5);--card-color-bg:rgba(155,89,182,0.12);transition-delay:.35s">
+        <div class="area-icon">🤝</div>
+        <h3>Cooperação Sul-Sul</h3>
+        <p>Fortalecer as relações entre países em desenvolvimento com intercâmbio de experiências e recursos complementares.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXAMPLES ===== -->
+<section id="examples">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag">Casos Reais</div>
+      <h2 class="section-title">Parcerias que transformam o mundo</h2>
+      <p class="section-sub">Exemplos concretos de cooperação global que mostram o impacto real da ODS 17.</p>
+    </div>
+    <div class="examples-grid">
+      <div class="example-card fade-up" style="--ex-color1:#1a6fa8;--ex-color2:#0d4070;--ex-icon:'🏭'">
+        <div class="example-header">
+          <div class="example-tag">Clima &amp; Energia</div>
+          <h3>Acordo de Paris (2015)</h3>
+        </div>
+        <div class="example-body">
+          <p>196 países uniram-se para limitar o aquecimento global, com países desenvolvidos financiando a transição energética de nações em desenvolvimento.</p>
+          <div class="example-meta">
+            <span class="meta-tag">🌍 196 países</span>
+            <span class="meta-tag">💚 USD 100 bi/ano</span>
+            <span class="meta-tag">📅 2015</span>
+          </div>
+        </div>
+      </div>
+      <div class="example-card fade-up" style="--ex-color1:#19a86b;--ex-color2:#0d6640;--ex-icon:'💊';transition-delay:.1s">
+        <div class="example-header">
+          <div class="example-tag">Saúde Global</div>
+          <h3>COVAX — Vacinas para todos</h3>
+        </div>
+        <div class="example-body">
+          <p>Iniciativa da OMS e parceiros para garantir acesso equitativo às vacinas contra COVID-19 em países de baixa renda — 2 bilhões de doses distribuídas.</p>
+          <div class="example-meta">
+            <span class="meta-tag">💉 2B doses</span>
+            <span class="meta-tag">🌐 92 países</span>
+            <span class="meta-tag">🤝 OMS + UNICEF</span>
+          </div>
+        </div>
+      </div>
+      <div class="example-card fade-up" style="--ex-color1:#9b59b6;--ex-color2:#5b2780;--ex-icon:'🎓';transition-delay:.2s">
+        <div class="example-header">
+          <div class="example-tag">Educação</div>
+          <h3>Erasmus+ — Europa Unida</h3>
+        </div>
+        <div class="example-body">
+          <p>Programa da União Europeia que financia mobilidade acadêmica e profissional, beneficiando mais de 10 milhões de pessoas em 33 países.</p>
+          <div class="example-meta">
+            <span class="meta-tag">📚 10M+ beneficiados</span>
+            <span class="meta-tag">🏛️ 33 países</span>
+            <span class="meta-tag">💶 €28B/ciclo</span>
+          </div>
+        </div>
+      </div>
+      <div class="example-card fade-up" style="--ex-color1:#f9c11d;--ex-color2:#b8870a;--ex-icon:'☀️';transition-delay:.1s">
+        <div class="example-header">
+          <div class="example-tag">Energia Limpa</div>
+          <h3>Aliança Solar Internacional</h3>
+        </div>
+        <div class="example-body">
+          <p>Iniciativa da Índia e França para conectar mais de 120 países ricos em sol, acelerando o acesso à energia solar a custo acessível.</p>
+          <div class="example-meta">
+            <span class="meta-tag">☀️ 120 países</span>
+            <span class="meta-tag">⚡ 1TW meta 2030</span>
+            <span class="meta-tag">🌍 Sul Global</span>
+          </div>
+        </div>
+      </div>
+      <div class="example-card fade-up" style="--ex-color1:#e84393;--ex-color2:#8c005a;--ex-icon:'💻';transition-delay:.2s">
+        <div class="example-header">
+          <div class="example-tag">Tecnologia</div>
+          <h3>Internet para Todos — África</h3>
+        </div>
+        <div class="example-body">
+          <p>Parceria entre a ONU, Google, Meta e governos africanos para conectar 300 milhões de pessoas sem acesso à internet até 2030.</p>
+          <div class="example-meta">
+            <span class="meta-tag">📡 300M pessoas</span>
+            <span class="meta-tag">🌍 África</span>
+            <span class="meta-tag">🤖 IA inclusiva</span>
+          </div>
+        </div>
+      </div>
+      <div class="example-card fade-up" style="--ex-color1:#ff6b35;--ex-color2:#c03000;--ex-icon:'🏗️';transition-delay:.3s">
+        <div class="example-header">
+          <div class="example-tag">Infraestrutura</div>
+          <h3>BRI — Nova Rota da Seda</h3>
+        </div>
+        <div class="example-body">
+          <p>Projeto chinês de infraestrutura conectando mais de 150 países com estradas, ferrovias, portos e rotas digitais para o desenvolvimento.</p>
+          <div class="example-meta">
+            <span class="meta-tag">🛤️ 150+ países</span>
+            <span class="meta-tag">💰 USD 1 trilhão</span>
+            <span class="meta-tag">🌐 3 continentes</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section id="stats">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag">Impacto em Números</div>
+      <h2 class="section-title">O que as parcerias já alcançaram</h2>
+      <p class="section-sub">Dados do progresso global rumo à Agenda 2030 — mesmo com desafios, os avanços são reais.</p>
+    </div>
+    <div class="stats-visual fade-up">
+      <div class="stat-bars" id="statBars">
+        <div class="stat-row">
+          <div class="stat-label">Acesso à internet global</div>
+          <div class="bar-track"><div class="bar-fill" style="--bar-color1:#2196f3;--bar-color2:#19a86b;" data-width="67"></div></div>
+          <div class="stat-val">67%</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-label">Energias renováveis na matriz</div>
+          <div class="bar-track"><div class="bar-fill" style="--bar-color1:#f9c11d;--bar-color2:#ff6b35;" data-width="29"></div></div>
+          <div class="stat-val">29%</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-label">Redução da pobreza extrema</div>
+          <div class="bar-track"><div class="bar-fill" style="--bar-color1:#19a86b;--bar-color2:#2196f3;" data-width="58"></div></div>
+          <div class="stat-val">58%</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-label">Países com ODS integradas</div>
+          <div class="bar-track"><div class="bar-fill" style="--bar-color1:#9b59b6;--bar-color2:#e84393;" data-width="80"></div></div>
+          <div class="stat-val">80%</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-label">Ajuda oficial ao desenvolvimento</div>
+          <div class="bar-track"><div class="bar-fill" style="--bar-color1:#e84393;--bar-color2:#9b59b6;" data-width="45"></div></div>
+          <div class="stat-val">45%</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-label">Meta de parceria público-privada</div>
+          <div class="bar-track"><div class="bar-fill" style="--bar-color1:#ff6b35;--bar-color2:#f9c11d;" data-width="72"></div></div>
+          <div class="stat-val">72%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TIMELINE ===== -->
+<section id="timeline">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag">Agenda 2030</div>
+      <h2 class="section-title">Linha do tempo das parcerias globais</h2>
+      <p class="section-sub">Marcos históricos que moldaram a cooperação internacional para o desenvolvimento sustentável.</p>
+    </div>
+    <div class="timeline-wrap">
+      <div class="tl-item fade-up">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-year">1945</div>
+          <h4>Criação da ONU</h4>
+          <p>Fundação das Nações Unidas com o objetivo de promover a paz, segurança e cooperação internacional entre as nações.</p>
+        </div>
+      </div>
+      <div class="tl-item fade-up" style="transition-delay:.1s">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-year">2000</div>
+          <h4>Objetivos do Milênio (ODM)</h4>
+          <p>8 objetivos adotados por 189 países para reduzir a pobreza, a fome e as doenças até 2015 — precursores das ODS.</p>
+        </div>
+      </div>
+      <div class="tl-item fade-up" style="transition-delay:.2s">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-year">2015</div>
+          <h4>Adoção da Agenda 2030</h4>
+          <p>Os 193 países-membros da ONU adotam os 17 Objetivos de Desenvolvimento Sustentável em setembro de 2015.</p>
+        </div>
+      </div>
+      <div class="tl-item fade-up" style="transition-delay:.3s">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-year">2016</div>
+          <h4>Acordo de Paris entra em vigor</h4>
+          <p>O histórico acordo climático começa a ser implementado, com países apresentando planos nacionais de redução de emissões.</p>
+        </div>
+      </div>
+      <div class="tl-item fade-up" style="transition-delay:.4s">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-year">2020</div>
+          <h4>Década da Ação ONU</h4>
+          <p>ONU lança a "Década da Ação" exigindo esforços acelerados de governos, empresas e sociedade civil para atingir as ODS até 2030.</p>
+        </div>
+      </div>
+      <div class="tl-item fade-up" style="transition-delay:.5s">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-year">2023</div>
+          <h4>Cúpula das ODS — Avaliação crítica</h4>
+          <p>Cúpula de alto nível revelou que apenas 15% das metas estão no caminho certo, reforçando a urgência das parcerias.</p>
+        </div>
+      </div>
+      <div class="tl-item fade-up" style="transition-delay:.6s">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-year">2030</div>
+          <h4>Prazo final das ODS</h4>
+          <p>O mundo deve atingir os 17 objetivos e 169 metas. O progresso depende diretamente da força das parcerias globais construídas agora.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FACTS ===== -->
+<section id="facts">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag">Você sabia?</div>
+      <h2 class="section-title">Curiosidades sobre a ODS 17</h2>
+    </div>
+    <div class="facts-grid">
+      <div class="fact-card fade-up">
+        <div class="fact-num">USD 4T</div>
+        <p>É o valor anual estimado que os países em desenvolvimento precisam para atingir as ODS — e as parcerias são a principal fonte.</p>
+      </div>
+      <div class="fact-card fade-up" style="transition-delay:.08s">
+        <div class="fact-num">17ª</div>
+        <p>A ODS 17 é considerada a mais importante — sem ela, nenhuma das outras 16 pode ser plenamente realizada de forma isolada.</p>
+      </div>
+      <div class="fact-card fade-up" style="transition-delay:.16s">
+        <div class="fact-num">80%</div>
+        <p>Do comércio mundial passa por cadeias de valor internacionais — demonstrando como a interdependência global é real e necessária.</p>
+      </div>
+      <div class="fact-card fade-up" style="transition-delay:.24s">
+        <div class="fact-num">3.5B</div>
+        <p>Pessoas ainda não têm acesso adequado à internet — a ODS 17 é fundamental para a inclusão digital global até 2030.</p>
+      </div>
+      <div class="fact-card fade-up" style="transition-delay:.32s">
+        <div class="fact-num">119</div>
+        <p>Indicadores específicos foram criados para monitorar o progresso da ODS 17, abrangendo finanças, tecnologia, comércio e dados.</p>
+      </div>
+      <div class="fact-card fade-up" style="transition-delay:.4s">
+        <div class="fact-num">2X</div>
+        <p>O número de parcerias público-privadas voltadas aos ODS dobrou nos últimos 5 anos, mas ainda precisa crescer muito mais.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section id="quiz">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag">Teste seu conhecimento</div>
+      <h2 class="section-title">Quiz: ODS 17 e Sustentabilidade</h2>
+      <p class="section-sub">Responda 5 perguntas e descubra o quanto você sabe sobre parcerias globais!</p>
+    </div>
+    <div class="quiz-box fade-up">
+      <div class="quiz-progress" id="quizProgress"></div>
+      <div id="quizContent">
+        <div class="quiz-q" id="quizQ"></div>
+        <div class="quiz-options" id="quizOpts"></div>
+        <div class="quiz-feedback" id="quizFeedback"></div>
+        <div class="quiz-nav">
+          <div class="quiz-score" id="quizScore">Questão 1 de 5</div>
+          <button class="btn-primary" id="quizNext" style="display:none;" onclick="nextQuestion()">Próxima <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+      <div id="quizResult" style="display:none;text-align:center;padding:20px 0;">
+        <div style="font-size:3.5rem;margin-bottom:12px;" id="quizEmoji">🌍</div>
+        <div class="tl-year" style="font-size:2.2rem;" id="quizFinalScore"></div>
+        <p style="color:var(--text-muted);margin:10px 0 28px;font-size:0.95rem;" id="quizMsg"></p>
+        <button class="btn-primary" onclick="restartQuiz()">Jogar novamente <i class="fa-solid fa-rotate-right" style="margin-left:8px;"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MAP ===== -->
+<section id="map">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag">Mapa Global</div>
+      <h2 class="section-title">Parcerias ao redor do mundo</h2>
+      <p class="section-sub">Clique nos pontos do mapa para descobrir exemplos de cooperação em diferentes regiões.</p>
+    </div>
+    <div class="map-container fade-up" style="position:relative;background:var(--card-bg);padding:20px;">
+      <div class="map-tooltip" id="mapTooltip"></div>
+      <svg class="world-svg" viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg">
+        <!-- Simplified world continents -->
+        <!-- North America -->
+        <path d="M 80 80 L 240 80 L 260 160 L 240 200 L 200 220 L 180 260 L 150 270 L 140 250 L 120 240 L 100 200 L 80 160 Z" fill="rgba(33,150,243,0.15)" stroke="rgba(33,150,243,0.3)" stroke-width="1.5"/>
+        <!-- South America -->
+        <path d="M 180 280 L 240 280 L 260 340 L 250 420 L 210 460 L 180 440 L 160 380 L 160 320 Z" fill="rgba(25,168,107,0.15)" stroke="rgba(25,168,107,0.3)" stroke-width="1.5"/>
+        <!-- Europe -->
+        <path d="M 390 60 L 480 60 L 490 120 L 460 140 L 420 140 L 400 120 Z" fill="rgba(155,89,182,0.2)" stroke="rgba(155,89,182,0.3)" stroke-width="1.5"/>
+        <!-- Africa -->
+        <path d="M 400 160 L 480 160 L 500 260 L 480 360 L 440 400 L 400 380 L 380 300 L 380 200 Z" fill="rgba(249,193,29,0.15)" stroke="rgba(249,193,29,0.3)" stroke-width="1.5"/>
+        <!-- Asia -->
+        <path d="M 490 60 L 760 60 L 780 140 L 740 200 L 660 220 L 580 200 L 500 180 L 480 140 Z" fill="rgba(232,67,147,0.12)" stroke="rgba(232,67,147,0.25)" stroke-width="1.5"/>
+        <!-- Middle East -->
+        <path d="M 490 160 L 570 160 L 580 220 L 540 240 L 490 220 Z" fill="rgba(255,107,53,0.15)" stroke="rgba(255,107,53,0.3)" stroke-width="1.5"/>
+        <!-- South/SE Asia -->
+        <path d="M 620 200 L 760 200 L 780 280 L 740 300 L 680 280 L 620 260 Z" fill="rgba(33,150,243,0.1)" stroke="rgba(33,150,243,0.2)" stroke-width="1.5"/>
+        <!-- Australia -->
+        <path d="M 700 340 L 800 340 L 820 400 L 780 440 L 720 420 L 690 380 Z" fill="rgba(25,168,107,0.12)" stroke="rgba(25,168,107,0.25)" stroke-width="1.5"/>
+        <!-- Ocean labels -->
+        <text x="310" y="200" fill="rgba(255,255,255,0.1)" font-size="14" font-family="Syne, sans-serif">ATLÂNTICO</text>
+        <text x="820" y="250" fill="rgba(255,255,255,0.1)" font-size="14" font-family="Syne, sans-serif">PACÍFICO</text>
+
+        <!-- Grid lines (longitude/latitude) -->
+        <line x1="0" y1="250" x2="900" y2="250" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+        <line x1="450" y1="0" x2="450" y2="500" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+
+        <!-- Partnership dots -->
+        <circle class="map-dot" cx="160" cy="140" r="7" fill="#2196f3" opacity="0.9"
+          data-name="Acordo de Paris" data-info="EUA e Canadá integram metas climáticas com financiamento conjunto de USD 100B/ano" />
+        <circle class="map-dot" cx="215" cy="330" r="7" fill="#19a86b" opacity="0.9"
+          data-name="Brasil — Amazônia" data-info="Fundo Amazônia: parceria com 66 países para proteção florestal e bioeconomia" />
+        <circle class="map-dot" cx="440" cy="100" r="7" fill="#9b59b6" opacity="0.9"
+          data-name="União Europeia" data-info="Erasmus+ e Green Deal: 30 países unidos em educação e transição climática" />
+        <circle class="map-dot" cx="435" cy="260" r="7" fill="#f9c11d" opacity="0.9"
+          data-name="África — COVAX" data-info="Distribuição de vacinas para 54 países africanos via parceria OMS/COVAX" />
+        <circle class="map-dot" cx="650" cy="120" r="7" fill="#e84393" opacity="0.9"
+          data-name="China — BRI" data-info="Nova Rota da Seda: infraestrutura para mais de 150 países em 3 continentes" />
+        <circle class="map-dot" cx="530" cy="190" r="7" fill="#ff6b35" opacity="0.9"
+          data-name="Índia — Aliança Solar" data-info="Aliança Solar Internacional: 120 países para energia solar acessível no Sul Global" />
+        <circle class="map-dot" cx="750" cy="370" r="7" fill="#19a86b" opacity="0.9"
+          data-name="Austrália" data-info="Parceria Indo-Pacífico para infraestrutura digital e energias limpas na Oceania" />
+      </svg>
+    </div>
+    <p style="text-align:center;color:var(--text-muted);font-size:0.85rem;margin-top:16px;">
+      <i class="fa-solid fa-circle-info" style="margin-right:6px;color:var(--brand-light);"></i>
+      Clique nos pontos coloridos para saber mais sobre cada parceria
+    </p>
+  </div>
+</section>
+
+<!-- ===== NEWS ===== -->
+<section id="news">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag">Atualizações</div>
+      <h2 class="section-title">Notícias sobre a Agenda 2030</h2>
+      <p class="section-sub">Fique por dentro das últimas ações e compromissos globais rumo ao desenvolvimento sustentável.</p>
+    </div>
+    <div class="news-grid">
+      <div class="news-card fade-up">
+        <div class="news-date">📅 Junho 2025</div>
+        <h4>ONU lança plataforma global de dados sobre ODS</h4>
+        <p>Nova ferramenta digital permite que qualquer pessoa acompanhe em tempo real o progresso de cada um dos 169 indicadores globais.</p>
+        <a href="https://sdgs.un.org" target="_blank" class="news-link">Saiba mais <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+      <div class="news-card fade-up" style="transition-delay:.1s">
+        <div class="news-date">📅 Março 2025</div>
+        <h4>G20 reforça compromisso com financiamento climático</h4>
+        <p>As maiores economias do mundo concordaram em triplicar o investimento em energia limpa até 2030, com foco no Sul Global.</p>
+        <a href="https://www.un.org/sustainabledevelopment" target="_blank" class="news-link">Saiba mais <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+      <div class="news-card fade-up" style="transition-delay:.2s">
+        <div class="news-date">📅 Janeiro 2025</div>
+        <h4>Relatório: 15% das metas ODS no caminho certo</h4>
+        <p>Avaliação da ONU aponta que o mundo precisa acelerar as parcerias para reverter o atraso nas metas de 2030, especialmente em saúde e educação.</p>
+        <a href="https://unstats.un.org/sdgs" target="_blank" class="news-link">Saiba mais <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info fade-up">
+        <div class="section-tag" style="margin-bottom:16px;">Participe</div>
+        <h3>Faça parte da mudança</h3>
+        <p>Seja você estudante, professor, empresa ou organização — há espaço para todos contribuírem com as parcerias que vão transformar o mundo até 2030.</p>
+        <div class="contact-methods">
+          <div class="contact-m">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Projetos escolares e acadêmicos</span>
+          </div>
+          <div class="contact-m">
+            <i class="fa-solid fa-building"></i>
+            <span>Parcerias empresariais e ESG</span>
+          </div>
+          <div class="contact-m">
+            <i class="fa-solid fa-seedling"></i>
+            <span>Iniciativas comunitárias locais</span>
+          </div>
+          <div class="contact-m">
+            <i class="fa-brands fa-osi"></i>
+            <span>Colaboração com ONGs e governos</span>
+          </div>
+        </div>
+      </div>
+      <div class="fade-up" style="transition-delay:.15s">
+        <div id="contactForm">
+          <div class="form-group">
+            <label>Seu nome</label>
+            <input type="text" placeholder="Ex: Maria Silva" />
+          </div>
+          <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" placeholder="maria@email.com" />
+          </div>
+          <div class="form-group">
+            <label>Tipo de participação</label>
+            <select>
+              <option value="">Selecione uma opção...</option>
+              <option>Estudante ou professor</option>
+              <option>Empresa ou organização</option>
+              <option>Comunidade local</option>
+              <option>Pesquisador</option>
+              <option>Outro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Como você quer contribuir?</label>
+            <textarea placeholder="Descreva sua ideia de parceria ou projeto..."></textarea>
+          </div>
+          <button class="btn-primary" onclick="submitForm()" style="width:100%;">
+            <i class="fa-solid fa-paper-plane" style="margin-right:8px;"></i> Enviar proposta
+          </button>
+        </div>
+        <div class="form-success" id="formSuccess">
+          <i class="fa-solid fa-circle-check"></i>
+          <h4>Proposta enviada! 🌍</h4>
+          <p style="color:var(--text-muted);">Obrigado por querer fazer parte da mudança. Juntos, chegamos mais longe.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo" style="font-size:1.5rem;margin-bottom:10px;">ODS<span style="color:var(--accent)">17</span></div>
+        <p>Um projeto educativo sobre o Objetivo de Desenvolvimento Sustentável 17 — Parcerias para o Desenvolvimento, da Agenda 2030 da ONU.</p>
+        <div class="social-links">
+          <a href="https://twitter.com/ONU_PT" target="_blank" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://www.facebook.com/ONUBrasil" target="_blank" class="social-link"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/onubrasil" target="_blank" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@ONUBrasil" target="_blank" class="social-link"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Seções</h5>
+        <a href="#objectives">Objetivos</a>
+        <a href="#areas">Áreas de Atuação</a>
+        <a href="#examples">Exemplos</a>
+        <a href="#stats">Estatísticas</a>
+        <a href="#timeline">Linha do Tempo</a>
+        <a href="#quiz">Quiz</a>
+      </div>
+      <div class="footer-col">
+        <h5>ONU — Links úteis</h5>
+        <a href="https://sdgs.un.org" target="_blank">Portal SDGs ONU</a>
+        <a href="https://unstats.un.org/sdgs" target="_blank">Estatísticas ODS</a>
+        <a href="https://www.undp.org/pt" target="_blank">PNUD Brasil</a>
+        <a href="https://brasil.un.org" target="_blank">ONU Brasil</a>
+        <a href="https://www.agenda2030.org.br" target="_blank">Agenda 2030 BR</a>
+      </div>
+      <div class="footer-col">
+        <h5>Recursos</h5>
+        <a href="https://www.un.org/sustainabledevelopment/pt" target="_blank">ODS Oficial</a>
+        <a href="https://www.ipea.gov.br/ods" target="_blank">IPEA — ODS</a>
+        <a href="https://odsbrasil.gov.br" target="_blank">ODS Brasil Gov</a>
+        <a href="https://www.wwf.org.br" target="_blank">WWF Brasil</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 ODS 17 — Projeto Educativo. Feito com 💙 para um mundo melhor.</span>
+      <span>Agenda 2030 — <a href="https://sdgs.un.org" target="_blank" style="color:var(--brand-light);">sdgs.un.org</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ===== THEME TOGGLE ===== */
+const themeBtn = document.getElementById('themeBtn');
+const themeIcon = document.getElementById('themeIcon');
+const html = document.documentElement;
+
+themeBtn.addEventListener('click', () => {
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  themeIcon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+});
+
+/* ===== HAMBURGER ===== */
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.toggle('open');
+});
+document.querySelectorAll('.mobile-menu a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
+});
+
+/* ===== SCROLL REVEAL ===== */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      // Trigger counters
+      if (entry.target.closest('#counters')) triggerCounters();
+      // Trigger bars
+      if (entry.target.closest('#stats') || entry.target.id === 'statBars') triggerBars();
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+/* ===== COUNTERS ===== */
+let countersTriggered = false;
+function triggerCounters() {
+  if (countersTriggered) return;
+  countersTriggered = true;
+  document.querySelectorAll('.counter-num').forEach(el => {
+    const target = parseInt(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const duration = 2000;
+    const start = performance.now();
+    function update(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(eased * target).toLocaleString('pt-BR') + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  });
+}
+
+/* ===== BARS ===== */
+let barsTriggered = false;
+function triggerBars() {
+  if (barsTriggered) return;
+  barsTriggered = true;
+  document.querySelectorAll('.bar-fill').forEach(bar => {
+    bar.style.width = bar.dataset.width + '%';
+  });
+}
+
+const statsObs = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) triggerBars();
+}, { threshold: 0.3 });
+const statEl = document.getElementById('statBars');
+if (statEl) statsObs.observe(statEl);
+
+/* ===== MAP TOOLTIP ===== */
+const tooltip = document.getElementById('mapTooltip');
+document.querySelectorAll('.map-dot').forEach(dot => {
+  dot.addEventListener('mouseenter', (e) => {
+    const rect = dot.closest('svg').getBoundingClientRect();
+    const cx = parseFloat(dot.getAttribute('cx'));
+    const cy = parseFloat(dot.getAttribute('cy'));
+    const svgW = dot.closest('svg').viewBox.baseVal.width;
+    const svgH = dot.closest('svg').viewBox.baseVal.height;
+    const x = (cx / svgW) * rect.width;
+    const y = (cy / svgH) * rect.height;
+    tooltip.innerHTML = `<strong>${dot.dataset.name}</strong>${dot.dataset.info}`;
+    tooltip.style.left = (x + 12) + 'px';
+    tooltip.style.top = (y - 20) + 'px';
+    tooltip.classList.add('show');
+  });
+  dot.addEventListener('mouseleave', () => tooltip.classList.remove('show'));
+});
+
+/* ===== QUIZ ===== */
+const questions = [
+  {
+    q: "Quantos países adotaram a Agenda 2030 em 2015?",
+    opts: ["150 países", "193 países", "120 países", "200 países"],
+    answer: 1,
+    explain: "Todos os 193 países-membros da ONU adotaram a Agenda 2030 em setembro de 2015, incluindo os 17 ODS e 169 metas."
+  },
+  {
+    q: "Qual é o principal objetivo da ODS 17?",
+    opts: [
+      "Eliminar a fome mundial",
+      "Fortalecer parcerias globais para o desenvolvimento sustentável",
+      "Garantir educação de qualidade",
+      "Combater as mudanças climáticas"
+    ],
+    answer: 1,
+    explain: "A ODS 17 tem como foco fortalecer os meios de implementação e revitalizar a parceria global para o desenvolvimento sustentável."
+  },
+  {
+    q: "O que é o COVAX?",
+    opts: [
+      "Um tratado de comércio internacional",
+      "Uma conferência climática da ONU",
+      "Uma iniciativa para acesso equitativo a vacinas",
+      "Uma plataforma de dados sobre ODS"
+    ],
+    answer: 2,
+    explain: "O COVAX é a iniciativa liderada pela OMS para garantir acesso equitativo às vacinas em países de baixa e média renda."
+  },
+  {
+    q: "Segundo a ONU, qual percentual das metas ODS estava no caminho certo em 2023?",
+    opts: ["50%", "30%", "15%", "45%"],
+    answer: 2,
+    explain: "O relatório de 2023 revelou que apenas cerca de 15% das metas estavam no caminho certo, reforçando a urgência das parcerias."
+  },
+  {
+    q: "Qual é o prazo final para atingir os Objetivos de Desenvolvimento Sustentável?",
+    opts: ["2025", "2035", "2030", "2040"],
+    answer: 2,
+    explain: "A Agenda 2030 estabelece o ano de 2030 como o prazo para atingir os 17 ODS e suas 169 metas."
+  }
+];
+
+let currentQ = 0, score = 0, answered = false;
+
+function renderQuiz() {
+  const q = questions[currentQ];
+  document.getElementById('quizQ').textContent = q.q;
+  document.getElementById('quizScore').textContent = `Questão ${currentQ + 1} de ${questions.length}`;
+  document.getElementById('quizNext').style.display = 'none';
+  document.getElementById('quizFeedback').classList.remove('show', 'ok', 'fail');
+  answered = false;
+
+  const optsEl = document.getElementById('quizOpts');
+  optsEl.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt';
+    btn.textContent = opt;
+    btn.onclick = () => selectAnswer(i);
+    optsEl.appendChild(btn);
+  });
+
+  // Progress
+  const prog = document.getElementById('quizProgress');
+  prog.innerHTML = '';
+  questions.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'quiz-dot' + (i < currentQ ? ' done' : i === currentQ ? ' active' : '');
+    prog.appendChild(d);
+  });
+}
+
+function selectAnswer(idx) {
+  if (answered) return;
+  answered = true;
+  const q = questions[currentQ];
+  const opts = document.querySelectorAll('.quiz-opt');
+  opts.forEach((btn, i) => {
+    if (i === q.answer) btn.classList.add('correct');
+    else if (i === idx) btn.classList.add('wrong');
+    btn.style.pointerEvents = 'none';
+  });
+  if (idx === q.answer) score++;
+  const fb = document.getElementById('quizFeedback');
+  fb.textContent = (idx === q.answer ? '✅ Correto! ' : '❌ Errado! ') + q.explain;
+  fb.classList.add('show', idx === q.answer ? 'ok' : 'fail');
+  document.getElementById('quizNext').style.display = 'inline-flex';
+}
+
+function nextQuestion() {
+  currentQ++;
+  if (currentQ >= questions.length) {
+    showResult();
+  } else {
+    renderQuiz();
+  }
+}
+
+function showResult() {
+  document.getElementById('quizContent').style.display = 'none';
+  document.getElementById('quizResult').style.display = 'block';
+  const pct = score / questions.length;
+  document.getElementById('quizFinalScore').textContent = `${score} / ${questions.length} acertos`;
+  const msgs = [
+    { emoji: '🌱', msg: 'Continue aprendendo! Cada parceria começa com conhecimento.' },
+    { emoji: '🌍', msg: 'Bom começo! Você já conhece os fundamentos das parcerias globais.' },
+    { emoji: '🤝', msg: 'Muito bom! Você tem um sólido entendimento sobre a ODS 17.' },
+    { emoji: '🏆', msg: 'Excelente! Você é um verdadeiro embaixador das parcerias globais!' }
+  ];
+  const level = pct < 0.4 ? 0 : pct < 0.6 ? 1 : pct < 0.9 ? 2 : 3;
+  document.getElementById('quizEmoji').textContent = msgs[level].emoji;
+  document.getElementById('quizMsg').textContent = msgs[level].msg;
+}
+
+function restartQuiz() {
+  currentQ = 0; score = 0;
+  document.getElementById('quizContent').style.display = 'block';
+  document.getElementById('quizResult').style.display = 'none';
+  renderQuiz();
+}
+
+renderQuiz();
+
+/* ===== FORM ===== */
+function submitForm() {
+  document.getElementById('contactForm').style.display = 'none';
+  document.getElementById('formSuccess').classList.add('show');
+}
+
+/* ===== NAV SCROLL EFFECT ===== */
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('mainNav');
+  if (window.scrollY > 80) nav.style.padding = '12px 0';
+  else nav.style.padding = '18px 0';
+});
+</script>
+</body>
+</html>
